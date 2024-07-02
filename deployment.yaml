@@ -30,7 +30,6 @@ spec:
       - name: sidecar
         image: busybox
         command:
-         - "sh -c "
          - "env"
          - "sleep 4800"
         envFrom:
