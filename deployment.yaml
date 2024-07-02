@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
       - image: nginx
-        name: nginx
+        name: nginx        
         resources:
          limits:
           cpu: "1000m"
@@ -27,4 +27,22 @@ spec:
          requests:
           cpu: "500m"
           memory: "512Mi"
+      - name: sidecar
+        image: busybox
+        command:
+         - "sh -c "
+         - "env"
+         - "sleep 4800"
+        envFrom:
+         - configMapRef:
+             name: k8s-samples-cm
+         - secretRef:
+             name: k8s-sample-secret
+        resources:
+         limits:
+          cpu: "1000m"
+          memory: "1G"
+         requests:
+          cpu: "200m"
+          memory: "200Mi"        
 status: {}
